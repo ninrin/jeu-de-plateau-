@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+   
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>plateau de bataille</title>
+	
+  </head>
+  
+  <body>
+  <div id="container">
+	
+	<div class="d-flex justify-content-around">
+		<div class= "col md-6">	
+			<div class= "ml-5">	
+				<h4> Madara </h4>
+				<img src= "madara2.jpg" </img>
+				<span> vie: </span>
+				<span id= "vie1">  </span>
+				<span>attaque: </span>
+				<span id= "attaque1">  </span>
+			</div>
+			<div class="row">
+				<div class= "col md-12">
+					<button type="button" id = "fight1" class="btn btn-success">frapper</button>
+					<button type="button" id = "defendre1" class="btn btn-success">defendre</button>		
+				</div>
+			</div>	
+		
+			<div class="row">
+				<div id= "block1">
+					<div class= "col md-12 ">
+						<div class= "col md-6" >
+							<button type="button2" id= "haut1" class="btn btn-secondary ml-5 mt-1">Haut</button>
+						</div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+						  <button type="button" id ='gauche1' class="btn btn-secondary">Gauche</button>
+						  <button type="button" id= "bas1" class="btn btn-secondary">Bas</button>
+						  <button type="button" id="droite1" class="btn btn-secondary">Droite</button>
+						</div>
+						<div class="row">
+							<div class= "col md-6 ">
+								<button type="button" id= 'turn1' class="btn btn-outline-dark mt-1 ml-3">Passer son tour</button>				
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class= "col md-6">
+			<div class= 'ml-5'>
+				<h4> Hashirama </h4>
+				<img src= "hashirama.jpg" </img>
+				<span> vie: </span>
+				<span id= "vie2">  </span>
+				<span> attaque: </span>
+				<span id= "attaque2"> </span>
+			</div>
+			<div class="row">
+				<div class= "col md-12">
+					<button type="button" id = "fight2" class="btn btn-success">frapper</button>
+					<button type="button" id = "defendre2" class="btn btn-success">defendre</button>		
+				</div>
+			</div>
+		
+			<div class="row">
+				<div id ="block2">
+					<div class= "col md-12 ">
+						<div class= "col md-6" >
+							<button type="button2" id="haut2" class="btn btn-secondary ml-5 mt-1">Haut</button>
+						</div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+						  <button type="button" id ='gauche2' class="btn btn-secondary">Gauche</button>
+						  <button type="button" id= "bas2" class="btn btn-secondary">Bas</button>
+						  <button type="button" id="droite2" class="btn btn-secondary">Droite</button>
+						</div>
+						<div class="row">
+							<div class= "col md-6 ">
+								<button type="button" id= 'turn2' class="btn btn-outline-dark mt-1 ml-3">Passer son tour</button>				
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<canvas id="plateau" width="600" height="600"></canvas>
+</div>
+							
+</body>
+	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="style.css" />
+<script src="javascript/plateau.js"></script>
+<script src="javascript/setCase.js"></script>
+<script src="javascript/main.js"></script>
+				
+</html>
