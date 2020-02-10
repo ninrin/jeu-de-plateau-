@@ -12,4 +12,21 @@ canvas {
 .case1 {
 	background-color: yellow;
 }
- 
+
+
+
+#joueur1{
+	margin-right: 50px;
+}
+#joueur2{
+	margin-left: 50px;
+}
+.bttour{
+	background-color: darkorange;
+}
+.pvatt{
+	font-size: 30px;
+    border: outset;
+    background-color: black;
+    color: white;
+}
