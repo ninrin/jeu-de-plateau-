@@ -1,9 +1,9 @@
 $(document).ready(function(){	
 	// insérer les points de vie et attaque par défaut des personnages
-	$('#vie1').html(personnage1.vie);
-	$('#vie2').html(personnage2.vie);
-	$('#attaque1').html(personnage1.attaque);
-	$('#attaque2').html(personnage2.attaque);
+	$('#vie1').text(personnage1.vie);
+	$('#vie2').text(personnage2.vie);
+	$('#attaque1').text(personnage1.attaque);
+	$('#attaque2').text(personnage2.attaque);
 
 	// on cache les bouttons de combat par défaut
 	$("#fight1").hide();	
