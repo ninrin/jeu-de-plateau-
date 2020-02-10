@@ -1,4 +1,6 @@
-
+body{
+	background-image: url(vallée.png);
+}
 
 #container {
 	width: 600px;
@@ -7,13 +9,7 @@
 canvas {
 	margin-top: 20px;
 }
-
-
-
 .case1 {
 	background-color: yellow;
 }
-
-
- 
  
