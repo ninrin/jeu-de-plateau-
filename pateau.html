@@ -11,12 +11,12 @@
   
   <body>
   <div id="container">
-	
+	<p class="titre"> JEU DU PLATEAU </br> MADARA VS HASHIRAMA </p>
 	<div class="d-flex justify-content-around">
 		<div class= "col md-6" id="joueur1">	
 			<div class= "ml-5">	
-				<h4> Madara </h4>
-				<img src= "madara2.jpg" </img>
+				<h1 class="noms"> MADARA </h1>
+				<img src= "madara2.jpg" </img></br>
 				<span class="pvatt"> VIE: </span>
 				<span id= "vie1">  </span>
 				<span class="pvatt"> ATTAQUE: </span>
@@ -52,13 +52,15 @@
 	<canvas id="plateau" width="600" height="600"></canvas>
 		<div class= "col md-6" id="joueur2">
 			<div class= 'ml-5'>
-				<h4> Hashirama </h4>
-				<img src= "hashirama.jpg" </img>
-				<span class="pvatt"> VIE: </span>
-				<span id= "vie2">  </span>
-				<span class="pvatt"> ATTAQUE: </span>
-				<span id= "attaque2"> </span>
-			</div>
+				<h1 class="noms"> HASHIRAMA </h1>
+				<img src= "hashirama.jpg" </img></br>
+				<div class="stats">
+					<span class="pvatt"> VIE: </span>
+					<span id= "vie2">  </span>
+					<span class="pvatt"> ATTAQUE: </span>
+					<span id= "attaque2"> </span>
+				</div>
+		</div>
 			<div class="row">
 				<div class= "col md-12">
 					<button type="button" id = "fight2" class="btn btn-success">frapper</button>
@@ -68,7 +70,7 @@
 		
 			<div class="row">
 				<div id ="block2">
-					<div class= "col md-12 ">
+					<div class="col md-12">
 						<div class= "col md-6" >
 							<button type="button2" id="haut2" class="btn btn-secondary ml-5 mt-1"><img src="fhaut.png"></button>
 						</div>
@@ -85,7 +87,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
 </div>
 							
@@ -100,5 +101,4 @@
 <script src="javascript/plateau.js"></script>
 <script src="javascript/setCase.js"></script>
 <script src="javascript/main.js"></script>
-				
 </html>

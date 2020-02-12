@@ -1,5 +1,6 @@
 body{
 	background-image: url(vallée.png);
+	margin-top: 2%;
 }
 
 #container {
@@ -29,4 +30,22 @@ canvas {
     border: outset;
     background-color: black;
     color: white;
+}
+#vie1, #vie2, #attaque1, #attaque2, .noms{
+	font-size: 30px;
+	border: outset;
+    background-color: black;
+    color: white;
+}
+.stats{
+	width: 200px;
+}
+.titre{
+	font-size: 45px;
+    font-family: cursive;
+    font-weight: bold;
+    text-align: center;
+}
+img{
+	margin-bottom: 10px;
 }
