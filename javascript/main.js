@@ -1,64 +1,189 @@
-$(document).ready(function(){	
+$(document).ready(function () {
 	// insérer les points de vie et attaque par défaut des personnages
 	$('#vie1').text(personnage1.vie);
 	$('#vie2').text(personnage2.vie);
-	$('#attaque1').text(personnage1.attaque);
-	$('#attaque2').text(personnage2.attaque);
+	$('#attaque1').text(personnage1.degat);
+	$('#attaque2').text(personnage2.degat);
 
 	// on cache les bouttons de combat par défaut
-	$("#fight1").hide();	
+	$("#fight1").hide();
 	$("#defendre1").hide();
-	$("#fight2").hide();	
+	$("#fight2").hide();
 	$("#defendre2").hide();
 
 
 
 	// nombres de mouvement au deux joueurs
-	let nbMove= 0;
-	let nbMove2= 0;
+	let nbMove = 0;
+	let nbMove2 = 0;
 
 	//madara commence
 	$("#block2").hide();
 	$("#block1").show();
 
-	//fonction pour remplacer l'arme ramassée sur le plateau, pour bénéficier de sa puissance
-	function remplacement(defCase, defPerso, defBoutton){
-		if (casesTotale[defCase].numeroweapon === 0) {
-			defPerso.attaque = weapon1.dmg;
-			 $(defBoutton).html(defPerso.attaque);
-		} else if (casesTotale[defCase].numeroweapon === 1) {
-			defPerso.attaque = weapon2.dmg;
-			 $(defBoutton).html(defPerso.attaque);
-		 } else if (casesTotale[defCase].numeroweapon === 2) {
-			 defPerso.attaque = weapon3.dmg;
-			 $(defBoutton).html(defPerso.attaque);
-		} else if (casesTotale[defCase].numeroweapon === 3) {
-			defPerso.attaque = weapon4.dmg;
-			 $(defBoutton).html(defPerso.attaque);
-		} 
-			
+	//fonction pour toucher l'arme sur la case et bénéficier de sa puissance, tout en remettant le nouveau numéro de l'ancienne arme possédée sur le case.
+	function remplacement(nouvelleCase, defPerso, defBoutton, weapon1, weapon2, weapon3, weapon4) {
+		if ((casesTotale[nouvelleCase].numeroweapon === weapon1.numeroweapon) && (defPerso.degat == weapon2.dmg)) {
+			defPerso.degat = weapon1.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon2.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon1.numeroweapon) && (defPerso.degat == weapon3.dmg)) {
+			defPerso.degat = weapon1.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon3.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon1.numeroweapon) && (defPerso.degat == weapon4.dmg)) {
+			defPerso.degat = weapon1.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon4.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon1.numeroweapon) && (defPerso.degat == 10)) {
+			defPerso.degat = weapon1.dmg;
+			$(defBoutton).html(defPerso.degat);
+			casesTotale[nouvelleCase].numeroweapon = null;
+		} // guan dao
+		else if ((casesTotale[nouvelleCase].numeroweapon === weapon2.numeroweapon) && (defPerso.degat == weapon1.dmg)) {
+			defPerso.degat = weapon2.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon1.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon2.numeroweapon) && (defPerso.degat == weapon3.dmg)) {
+			defPerso.degat = weapon2.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon3.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon2.numeroweapon) && (defPerso.degat == weapon4.dmg)) {
+			defPerso.degat = weapon2.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon4.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon2.numeroweapon) && (defPerso.degat == 10)) {
+			defPerso.degat = weapon2.dmg;
+			$(defBoutton).html(defPerso.degat);
+			casesTotale[nouvelleCase].numeroweapon = null;
+		} // parchemin explosif
+		else if ((casesTotale[nouvelleCase].numeroweapon === weapon3.numeroweapon) && (defPerso.degat == weapon1.dmg)) {
+			defPerso.degat = weapon3.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon1.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon3.numeroweapon) && (defPerso.degat == weapon2.dmg)) {
+			defPerso.degat = weapon3.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon2.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon3.numeroweapon) && (defPerso.degat == weapon4.dmg)) {
+			defPerso.degat = weapon3.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon4.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon3.numeroweapon) && (defPerso.degat == 10)) {
+			defPerso.degat = weapon3.dmg;
+			$(defBoutton).html(defPerso.degat);
+			casesTotale[nouvelleCase].numeroweapon = null;
+		} // épée kusanagi
+		else if ((casesTotale[nouvelleCase].numeroweapon === weapon4.numeroweapon) && (defPerso.degat == weapon1.dmg)) {
+			defPerso.degat = weapon4.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon1.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon4.numeroweapon) && (defPerso.degat == weapon2.dmg)) {
+			defPerso.degat = weapon4.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon2.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon4.numeroweapon) && (defPerso.degat == weapon3.dmg)) {
+			defPerso.degat = weapon4.dmg;
+			casesTotale[nouvelleCase].numeroweapon = weapon3.numeroweapon;
+			$(defBoutton).html(defPerso.degat);
+		} else if ((casesTotale[nouvelleCase].numeroweapon === weapon4.numeroweapon) && (defPerso.degat == 10)) {
+			defPerso.degat = weapon4.dmg;
+			$(defBoutton).html(defPerso.degat);
+			casesTotale[nouvelleCase].numeroweapon = null;
+		}
+
 	};
 
 
+
+	// fonction permettant d'afficher une image de l'arme portée, à l'ancienne case, et affiche l'image du personnage pour la case suivante (nouvelleCase)
+	function letDown(weaponNb, weaponNb2, weaponNb3, weaponNb4, imageWeapon, imageWeapon2, imageWeapon3, imageWeapon4, nouvelleCase, ancienneCase, personnageId, playerImage) {
+
+		if ((casesTotale[ancienneCase].numeroweapon === weaponNb.numeroweapon) && (casesTotale[nouvelleCase].id !== "obstacle")) {
+			casesTotale[ancienneCase].id = "weapon";
+			casesTotale[nouvelleCase].id = personnageId.name;
+			var image = new Image();
+			image.src = imageWeapon;
+			image.addEventListener('load', function () {
+				;
+				context.drawImage(image, casesTotale[ancienneCase].positionX, casesTotale[ancienneCase].positionY, tailleCase, tailleCase);
+			}, false);
+			let imagePlayer = new Image();
+			imagePlayer.src = playerImage;
+			imagePlayer.addEventListener('load', function () {
+				;
+				context.drawImage(imagePlayer, casesTotale[nouvelleCase].positionX, casesTotale[nouvelleCase].positionY, tailleCase, tailleCase);
+			}, false);
+			return image;
+		} else if ((casesTotale[ancienneCase].numeroweapon === weaponNb2.numeroweapon) && (casesTotale[nouvelleCase].id !== "obstacle")) {
+			casesTotale[ancienneCase].id = "weapon";
+			casesTotale[nouvelleCase].id = personnageId.name;
+			var image = new Image();
+			image.src = imageWeapon2;
+			image.addEventListener('load', function () {
+				;
+				context.drawImage(image, casesTotale[ancienneCase].positionX, casesTotale[ancienneCase].positionY, tailleCase, tailleCase);
+			}, false);
+			let imagePlayer = new Image();
+			imagePlayer.src = playerImage;
+			imagePlayer.addEventListener('load', function () {
+				;
+				context.drawImage(imagePlayer, casesTotale[nouvelleCase].positionX, casesTotale[nouvelleCase].positionY, tailleCase, tailleCase);
+			}, false);
+			return image;
+
+		} else if ((casesTotale[ancienneCase].numeroweapon === weaponNb3.numeroweapon) && (casesTotale[nouvelleCase].id !== "obstacle")) {
+			casesTotale[ancienneCase].id = "weapon";
+			casesTotale[nouvelleCase].id = personnageId.name;
+			var image = new Image();
+			image.src = imageWeapon3;
+			image.addEventListener('load', function () {
+				;
+				context.drawImage(image, casesTotale[ancienneCase].positionX, casesTotale[ancienneCase].positionY, tailleCase, tailleCase);
+			}, false);
+			let imagePlayer = new Image();
+			imagePlayer.src = playerImage;
+			imagePlayer.addEventListener('load', function () {
+				;
+				context.drawImage(imagePlayer, casesTotale[nouvelleCase].positionX, casesTotale[nouvelleCase].positionY, tailleCase, tailleCase);
+			}, false);
+			return image;
+
+		} else if ((casesTotale[ancienneCase].numeroweapon === weaponNb4.numeroweapon) && (casesTotale[nouvelleCase].id !== "obstacle")) {
+			casesTotale[ancienneCase].id = "weapon";
+			casesTotale[nouvelleCase].id = personnageId.name;
+			var image = new Image();
+			image.src = imageWeapon4;
+			image.addEventListener('load', function () {
+				;
+				context.drawImage(image, casesTotale[ancienneCase].positionX, casesTotale[ancienneCase].positionY, tailleCase, tailleCase);
+			}, false);
+			let imagePlayer = new Image();
+			imagePlayer.src = playerImage;
+			imagePlayer.addEventListener('load', function () {
+				;
+				context.drawImage(imagePlayer, casesTotale[nouvelleCase].positionX, casesTotale[nouvelleCase].positionY, tailleCase, tailleCase);
+			}, false);
+			return image;
+		}
+	}
 	// Reset l'ancienne case, portant le joueur
-	function resetCase(laCase){
+	function resetCase(laCase) {
 		if (casesTotale[laCase]) {
-			console.log(casesTotale[laCase].positionX + "/" + casesTotale[laCase].positionY);
-			var set = new Image();
-			set.src = "blanc.png";
-			set.addEventListener('load', function() {
-				context.drawImage(set, casesTotale[laCase].positionX, casesTotale[laCase].positionY);
-		  }, false);
+			context.fillStyle = "white";
+			context.fillRect(casesTotale[laCase].positionX, casesTotale[laCase].positionY, tailleCase, tailleCase);
+			context.strokeStyle = 'purple';
+    		context.strokeRect(casesTotale[laCase].positionX, casesTotale[laCase].positionY, tailleCase, tailleCase); // Crée un case d'1/100 du plateau
 		}
 	};
 
 	// Lancement du système de combat, lorsque nos 2 protagonistes se croisent
-	function croissement(caseJoueurMadara, caseJoueurHashirama){
-		if((caseJoueurMadara == caseJoueurHashirama - 10) || (caseJoueurMadara == caseJoueurHashirama  + 10) || (caseJoueurMadara == caseJoueurHashirama - 1) || (caseJoueurMadara == caseJoueurHashirama + 1)){
+	function croissement(caseJoueurMadara, caseJoueurHashirama) {
+		if ((caseJoueurMadara == caseJoueurHashirama - 10) || (caseJoueurMadara == caseJoueurHashirama + 10) || (caseJoueurMadara == caseJoueurHashirama - 1) || (caseJoueurMadara == caseJoueurHashirama + 1)) {
 			$("#block2").hide();
-			$("#block1").hide();	
-			$("#fight1").show();	
-			$("#defendre1").show();			
+			$("#block1").hide();
+			$("#fight1").show();
+			$("#defendre1").show();
 		}
 	};
 
@@ -67,119 +192,138 @@ $(document).ready(function(){
 
 
 	// fonction de déplacement pour le personnage Madara
-	function deplacement(nb, nb2,boutton,hide,hide2,hide3, nbProchain){
-		$(boutton).click(function(){	
-			if( nbMove > 2) {
+	function deplacement(nb, nb2, boutton, hide, hide2, hide3) {
+		$(boutton).click(function () {
+			if (nbMove > 2) {
 				$("#block2").show();
-				$("#block1").hide();		
+				$("#block1").hide();
 				$("#gauche2").show();
 				$("#haut2").show();
 				$("#droite2").show();
 				$("#bas2").show()
-				nbMove2= 0;
+				nbMove2 = 0;
 				return;
 			}
 			// cacher les 3 autres bouttons, une fois la 1ère cliqué
 			$(hide).hide();
 			$(hide2).hide();
 			$(hide3).hide();
+			
 			//redéfinition des nouvelles caractéristiques 
-			var nouvelleCase = caseJoueur1 - nb;
+			var nouvelleCase = personnage1.Case - nb;
 			var ancienneCase = nouvelleCase + nb2;
-			caseJoueur1 = nouvelleCase
+			var caseMadara = casesTotale[nouvelleCase].numerocase;
+			personnage1.Case = nouvelleCase
 			console.log(ancienneCase);
-			console.log(nouvelleCase);
-			console.log(caseJoueur1);
-			var caseMadara = casesTotale[nouvelleCase].numerocase;			
-			Warriors[0].positionX = casesTotale[nouvelleCase].positionX;
-			Warriors[0].positionY = casesTotale[nouvelleCase].positionY;
-			if((casesTotale[nouvelleCase].id === "casevide")|| (casesTotale[nouvelleCase].id === "weapon")){
-				Warriors[0].nbCase = caseMadara;
-				var image = new Image();
-				image.src = "madara.jpg";
-				image.addEventListener('load', function() {;
-					context.drawImage(image, casesTotale[nouvelleCase].positionX, casesTotale[nouvelleCase].positionY, tailleCase, tailleCase);
-				}, false)
-			}else if (casesTotale[caseJoueur1 - nbProchain].id = 'obstacle')  {
-				caseJoueur1 = ancienneCase;
+			console.log(personnage1);
+			console.log(personnage1.Case);
+			console.log(casesTotale);
+			remplacement(nouvelleCase, personnage1, "#attaque1", weapon1, weapon2, weapon3, weapon4);
+			letDown(weapon1, weapon2, weapon3, weapon4, "kunai.jpg", "guan_dao.jpg", "Parchemin_explosif.png", "kusanagi.jpg", nouvelleCase, ancienneCase, personnage1, "madara.jpg")
+
+
+			if (casesTotale[nouvelleCase].id == 'obstacle') {
+				personnage1.Case = ancienneCase; console.log('obstacle');
 				$("#block1").hide();
-				
+
 				$("#block2").show();
 				$("#gauche2").show();
 				$("#haut2").show();
 				$("#droite2").show();
-				$("#bas2").show();					
-				nbMove2= 0;
-				return;	
-			} 
+				$("#bas2").show();
+				nbMove2 = 0;
+				return;
+			} else if ((casesTotale[nouvelleCase].id === "weapon") && (personnage1.degat !== 10)) {
+				resetCase(ancienneCase);
+				casesTotale[ancienneCase].id = 'casevide';
+				casesTotale[nouvelleCase].id = personnage1.name;
+				var image = new Image();
+				image.src = "madara.jpg";
+				image.addEventListener('load', function () {
+					;
+					context.drawImage(image, casesTotale[nouvelleCase].positionX, casesTotale[nouvelleCase].positionY, tailleCase, tailleCase);
+				}, false)
+			} else if (((casesTotale[nouvelleCase].id === "casevide") && (casesTotale[ancienneCase].id === "Madara")) || ((casesTotale[nouvelleCase].id === "weapon") && (personnage1.degat == 10))) {
+				resetCase(ancienneCase);
+				casesTotale[nouvelleCase].id = personnage1.name;
+				casesTotale[ancienneCase].id = 'casevide';
+				var image = new Image();
+				image.src = "madara.jpg";
+				image.addEventListener('load', function () {
+					;
+					context.drawImage(image, casesTotale[nouvelleCase].positionX, casesTotale[nouvelleCase].positionY, tailleCase, tailleCase);
+				}, false)
+			}
 
-			// remplace l'arme ramassée sur le plateau, pour bénéficier de sa puissance
-			remplacement(nouvelleCase, personnage1, "#attaque1");
-			
-			// remet l'ancienne case en case vide
-			casesTotale[ancienneCase].id = 'casevide';
-			resetCase(ancienneCase);
-
-			// on renomme l'id de la nouvelle case avec celui du personnage
-			casesTotale[nouvelleCase].id = personnage1.name;
 
 			// Lancement du système de combat, lorsque nos 2 protagonistes se croisent
-			croissement (caseJoueur1, caseJoueur2);
+			croissement(personnage1.Case, personnage2.Case);
 			nbMove++;
 		})
 	};
 
 
 	// fonction de déplacement pour le joueur Hashirama
-	function deplacement2(nb, nb2 ,boutton2,hides,hides2,hides3, nbProchain){
-		$(boutton2).click(function(){	
-			if( nbMove2 > 2) {
+	function deplacement2(nb, nb2, boutton2, hides, hides2, hides3) {
+		$(boutton2).click(function () {
+			if (nbMove2 > 2) {
 				$("#block2").hide();
 				$("#block1").show();
 				$("#gauche1").show();
 				$("#haut1").show();
 				$("#droite1").show();
-				$("#bas1").show();	
-				nbMove= 0;
-				return;			
+				$("#bas1").show();
+				nbMove = 0;
+				return;
 			}
 			$(hides).hide();
 			$(hides2).hide();
 			$(hides3).hide();
 
 
-			var nouvelleCase2 = caseJoueur2 - nb;
-			var ancienneCase = nouvelleCase2 + nb2;		
-			var caseHashirama = casesTotale[nouvelleCase2].numerocase;		
-			Warriors[1].positionX = casesTotale[nouvelleCase2].positionX;
-			Warriors[1].positionY = casesTotale[nouvelleCase2].positionY;
-			console.log(ancienneCase);
-			console.log(nouvelleCase2);
-			console.log(caseJoueur2);
-			caseJoueur2 = nouvelleCase2;
-			if ((casesTotale[nouvelleCase2].id === "casevide")|| (casesTotale[nouvelleCase2].id === "weapon")){
-					Warriors[1].nbCase = caseHashirama;
-					var image = new Image();
-					image.src = "hashirama.jpg";
-					image.addEventListener('load', function() {;
-						context.drawImage(image, casesTotale[nouvelleCase2].positionX, casesTotale[nouvelleCase2].positionY, tailleCase, tailleCase);
-					}, false);
-			} else if (casesTotale[caseJoueur2 - nbProchain].id = 'obstacle')  {
-						caseJoueur2 = nouvelleCase2 + nb2;
-						$("#block2").hide();
-						$("#block1").show();
-						$("#gauche1").show();
-						$("#haut1").show();
-						$("#droite1").show();
-						$("#bas1").show();	
-						nbMove= 0;
-						return;
-			} 
+			var nouvelleCase2 = personnage2.Case - nb;
+			var ancienneCase = nouvelleCase2 + nb2;
+			var caseHashirama = casesTotale[nouvelleCase2].numerocase;
+		
+			personnage2.Case = nouvelleCase2;
 
-			remplacement(nouvelleCase2, personnage2, "#attaque2");
-			casesTotale[ancienneCase].id = 'casevide';
-			resetCase(ancienneCase);
-			croissement (caseJoueur1, caseJoueur2);
+			remplacement(nouvelleCase2, personnage2, "#attaque2", weapon1, weapon2, weapon3, weapon4);
+			letDown(weapon1, weapon2, weapon3, weapon4, "kunai.jpg", "guan_dao.jpg", "Parchemin_explosif.png", "kusanagi.jpg", nouvelleCase2, ancienneCase, personnage2, "hashirama.jpg")
+
+			if (casesTotale[nouvelleCase2].id == 'obstacle') {
+				personnage2.Case = ancienneCase; console.log('obstacle');
+				$("#block2").hide();
+				$("#block1").show();
+				$("#gauche1").show();
+				$("#haut1").show();
+				$("#droite1").show();
+				$("#bas1").show();
+				nbMove = 0;
+				return;
+			} else if ((casesTotale[nouvelleCase2].id === "weapon") && (personnage2.degat !== 10)) {
+				resetCase(ancienneCase);
+				casesTotale[ancienneCase].id = 'casevide';
+				casesTotale[nouvelleCase2].id = personnage2.name;
+				var image = new Image();
+				image.src = "hashirama.jpg";
+				image.addEventListener('load', function () {
+					;
+					context.drawImage(image, casesTotale[nouvelleCase2].positionX, casesTotale[nouvelleCase2].positionY, tailleCase, tailleCase);
+				}, false)
+			}
+
+			else if (((casesTotale[nouvelleCase2].id === "casevide") && (casesTotale[ancienneCase].id === personnage2.name)) || ((casesTotale[nouvelleCase2].id === "weapon") && (personnage2.degat == 10))) {
+				resetCase(ancienneCase);
+				casesTotale[nouvelleCase2].id = personnage2.name;
+				casesTotale[ancienneCase].id = 'casevide';
+				var image = new Image();
+				image.src = "hashirama.jpg";
+				image.addEventListener('load', function () {
+					;
+					context.drawImage(image, casesTotale[nouvelleCase2].positionX, casesTotale[nouvelleCase2].positionY, tailleCase, tailleCase);
+				}, false)
+			}
+			croissement(personnage1.Case, personnage2.Case);
 			nbMove2++;
 
 		})
@@ -188,47 +332,44 @@ $(document).ready(function(){
 
 	// mise en fin de tour, pour chaque boutton correspondant 
 
-	$("#turn1").click(function(){	
+	$("#turn1").click(function () {
 		$("#block1").hide();
 		$("#block2").show();
 		$("#gauche2").show();
 		$("#haut2").show();
 		$("#droite2").show();
-		$("#bas2").show();	
+		$("#bas2").show();
 		nbMove2 = 0;
 	});
 
-
-
-	$("#turn2").click(function(){	
+	$("#turn2").click(function () {
 		$("#block2").hide();
 		$("#block1").show();
 		$("#gauche1").show();
 		$("#haut1").show();
 		$("#droite1").show();
-		$("#bas1").show();	
-		nbMove= 0;
+		$("#bas1").show();
+		nbMove = 0;
 	});
 
-
 	// mise en oeuvre des bouttons de déplacements de madara
-	deplacement(10, 10, '#haut1', '#bas1', '#gauche1', '#droite1', 10);		
-	deplacement(1, 1, '#gauche1','#bas1', '#haut1', '#droite1',1);
-	deplacement((-1), (-1), '#droite1', '#bas1', '#gauche1', '#haut1', (-1));
-	deplacement((-10), (-10),'#bas1','#haut1', '#gauche1', '#droite1', (-10));
+	deplacement(10, 10, '#haut1', '#bas1', '#gauche1', '#droite1');
+	deplacement(1, 1, '#gauche1', '#bas1', '#haut1', '#droite1');
+	deplacement((-1), (-1), '#droite1', '#bas1', '#gauche1', '#haut1');
+	deplacement((-10), (-10), '#bas1', '#haut1', '#gauche1', '#droite1');
 
 	// mise en oeuvre des bouttons de déplacements de hashirama
-	deplacement2(10, 10, '#haut2', '#bas2', '#gauche2', '#droite2', 10);
-	deplacement2(1, 1, '#gauche2', '#bas2', '#haut2', '#droite2',1);
-	deplacement2((-1), (-1), '#droite2' , '#bas2', '#gauche2', '#haut2', (-1));
-	deplacement2((-10), (-10), '#bas2', '#haut2', '#gauche2', '#droite2', (-10));
+	deplacement2(10, 10, '#haut2', '#bas2', '#gauche2', '#droite2');
+	deplacement2(1, 1, '#gauche2', '#bas2', '#haut2', '#droite2');
+	deplacement2((-1), (-1), '#droite2', '#bas2', '#gauche2', '#haut2');
+	deplacement2((-10), (-10), '#bas2', '#haut2', '#gauche2', '#droite2');
 
 
 
 	// Définition des différentes actions, selon les bouttons cliquées
 	$('#fight1, #defendre1, #fight2, #defendre2').click(function () {
-		if (this.id == 'fight1') {   
-			personnage2.vie = personnage2.vie - personnage1.attaque;
+		if (this.id == 'fight1') {
+			personnage2.vie = personnage2.vie - personnage1.degat;
 			$("#vie2").html(personnage2.vie);
 			$("#fight1").hide();
 			$("#defendre1").hide();
@@ -238,14 +379,14 @@ $(document).ready(function(){
 				alert("Madara est le vainqeur!");
 				$("#container").hide();
 			}
-	   } else if (this.id == 'defendre1') {		
-			personnage1.vie= personnage1.vie + personnage2.attaque/2;
+		} else if (this.id == 'defendre1') {
+			personnage1.vie = personnage1.vie + personnage2.degat / 2;
 			$("#fight1").hide();
 			$("#defendre1").hide();
 			$("#fight2").show();
 			$("#defendre2").show();
-	   } else if (this.id == 'fight2') {
-			$("#vie1").html(personnage1.vie = personnage1.vie - personnage2.attaque);
+		} else if (this.id == 'fight2') {
+			$("#vie1").html(personnage1.vie = personnage1.vie - personnage2.degat);
 			$("#fight1").show();
 			$("#defendre1").show();
 			$("#fight2").hide();
@@ -254,15 +395,13 @@ $(document).ready(function(){
 				alert('Hashirama est le vainqueur!');
 				$("#container").hide();
 			}
-	   } else if (this.id == 'defendre2') {
-			personnage2.vie= personnage2.vie + personnage1.attaque/2;
+		} else if (this.id == 'defendre2') {
+			personnage2.vie = personnage2.vie + personnage1.degat / 2;
 			$("#fight1").show();
 			$("#fight2").hide();
 			$("#defendre2").hide();
-	   } 	   
+		}
 	});
-	 
+
 });
-
-
 
