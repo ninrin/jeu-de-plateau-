@@ -2,16 +2,41 @@
 // Création de la fonction qui retourne un nombre aléatoire entre 0 et 99
 function randomNumber() {
 	return Math.floor(Math.random() * (nombreCases));
-}
 
+
+}
+function resetCase(laCase) {
+	if (casesTotale[laCase]) {
+		context.fillStyle = "white";
+		context.fillRect(casesTotale[laCase].positionX, casesTotale[laCase].positionY, tailleCase, tailleCase);
+		context.strokeStyle = 'purple';
+		context.strokeRect(casesTotale[laCase].positionX, casesTotale[laCase].positionY, tailleCase, tailleCase); // Crée un case d'1/100 du plateau
+	}
+};
+function croissement(caseJoueurMadara, caseJoueurHashirama) {
+	if ((caseJoueurMadara == caseJoueurHashirama - 10) || (caseJoueurMadara == caseJoueurHashirama + 10) || (caseJoueurMadara == caseJoueurHashirama - 1) || (caseJoueurMadara == caseJoueurHashirama + 1)) {
+		$("#block2").hide();
+		$("#block1").hide();
+		$("#fight1").show();
+		$("#defendre1").show();
+	}
+};
 // Création des caractéristiques des personnages
 class Personnage {
-	constructor(name, img) {
+	constructor(name, img, gauche, droite, haut, bas, block) {
 		this.name = name;
 		this.degat = 10;
 		this.vie = 100;
 		this.Case = null;
+		this.nouvelleCase = 0;
+		this.ancienneCase = 0;
 		this.img = img;
+		this.gauche = gauche;
+		this.droite = droite;
+		this.haut = haut;
+		this.bas = bas;
+		this.block = block;
+		this.nbMove = 0;
 	}
 	set(autreJoueur) { // set la case et ajoute l'image du personnage sur cette case
 		while (this.Case == null) {
@@ -33,18 +58,158 @@ class Personnage {
 		};
 
 	}
+	deplacement(autreJoueur) {
+		let self = this;
+
+		$(this.gauche).click(function () {
+			if (self.nbMove > 2) {
+				$(autreJoueur.block).show();
+				$(self.block).hide();
+				$(autreJoueur.gauche).show();
+				$(autreJoueur.droite).show();
+				$(autreJoueur.haut).show();
+				$(autreJoueur.bas).show()
+				autreJoueur.nbMove = 0;
+				return;
+			}
+			$(self.droite).hide();
+			$(self.haut).hide();
+			$(self.bas).hide();
+			self.nouvelleCase = self.Case - 1; console.log(self.nouvelleCase)
+			self.ancienneCase = self.nouvelleCase + 1; console.log(self.ancienneCase)
+			if (casesTotale[self.nouvelleCase].id == 'obstacle') {
+				$(self.block).hide();
+				$(autreJoueur.block).show();
+				$(autreJoueur.gauche).show();
+				$(autreJoueur.haut).show();
+				$(autreJoueur.droite).show();
+				$(autreJoueur.bas).show();
+				autreJoueur.nbMove = 0;
+			}  else if ((casesTotale[self.nouvelleCase].id === "weapon") && (self.degat !== 10)) {
+				resetCase(ancienneCase);
+				casesTotale[ancienneCase].id = 'casevide';
+				casesTotale[nouvelleCase].id = self.name;
+				var image = new Image();
+				image.src = self.img;
+				image.addEventListener('load', function () {
+					;
+					context.drawImage(image, casesTotale[self.nouvelleCase].positionX, casesTotale[self.nouvelleCase].positionY, tailleCase, tailleCase);
+				}, false)
+			} else if (((casesTotale[self.nouvelleCase].id === "casevide") && (casesTotale[self.ancienneCase].id === self.name)) || ((casesTotale[self.nouvelleCase].id === "weapon") && (self.degat == 10))) {
+				resetCase(self.ancienneCase);
+				casesTotale[self.nouvelleCase].id = self.name;
+				casesTotale[self.ancienneCase].id = 'casevide';
+				var image = new Image();
+				image.src = self.img;
+				image.addEventListener('load', function () {
+					;
+					context.drawImage(image, casesTotale[self.nouvelleCase].positionX, casesTotale[self.nouvelleCase].positionY, tailleCase, tailleCase);
+				}, false)
+			}
+			croissement(self.Case, autreJoueur.Case);
+			self.nbMove++;
+		});
+		// $(this.droite).click(function () {
+			
+		// 	console.log('oyy')
+		// 	$(self.gauche).hide();
+		// 	$(self.haut).hide();
+		// 	$(self.bas).hide();
+		// 	console.log(self.Case)
+		// 	self.nouvelleCase = self.Case + 1; console.log(self.nouvelleCase)
+		// 	self.ancienneCase = self.nouvelleCase - 1; console.log(self.ancienneCase)
+		// 	if (casesTotale[self.nouvelleCase].id == 'obstacle') {
+		// 		$(self.block).hide();
+		// 		$(autreJoueur.block).show();
+		// 		$(autreJoueur.gauche).show();
+		// 		$(autreJoueur.haut).show();
+		// 		$(autreJoueur.droite).show();
+		// 		$(autreJoueur.bas).show();
+		// 		autreJoueur.nbMove = 0;
+		// 		return;
+		// 	} else {
+
+		// 		let image = new Image();
+		// 		image.src = self.img;
+
+		// 		image.addEventListener('load', function () {
+		// 			context.drawImage(image, casesTotale[self.nouvelleCase].positionX, casesTotale[self.nouvelleCase].positionY, tailleCase, tailleCase);
+		// 		}, false);
+		// 		resetCase(self.ancienneCase); console.log(casesTotale)
+		// 	}
+		// });
+
+		// $(this.haut).click(function () {
+		// 	console.log('oyy')
+		// 	$(self.gauche).hide();
+		// 	$(self.droite).hide();
+		// 	$(self.bas).hide();
+		// 	console.log(self.Case)
+		// 	self.nouvelleCase = self.Case - 10; console.log(self.nouvelleCase)
+		// 	self.ancienneCase = self.nouvelleCase + 10; console.log(self.ancienneCase)
+		// 	if (casesTotale[self.nouvelleCase].id == 'obstacle') {
+		// 		$(self.block).hide();
+		// 		$(autreJoueur.block).show();
+		// 		$(autreJoueur.gauche).show();
+		// 		$(autreJoueur.haut).show();
+		// 		$(autreJoueur.droite).show();
+		// 		$(autreJoueur.bas).show();
+		// 		autreJoueur.nbMove = 0;
+		// 	} else {
+
+		// 		let image = new Image();
+		// 		image.src = self.img;
+
+		// 		image.addEventListener('load', function () {
+		// 			context.drawImage(image, casesTotale[self.nouvelleCase].positionX, casesTotale[self.nouvelleCase].positionY, tailleCase, tailleCase);
+		// 		}, false);
+		// 		resetCase(self.ancienneCase); console.log(casesTotale)
+		// 	}
+		// })
+		// 	$(this.bas).click(function () {
+
+		// 		$(self.gauche).hide();
+		// 		$(self.droite).hide();
+		// 		$(self.haut).hide();
+		// 		console.log(self.Case)
+		// 		self.nouvelleCase = self.Case - 10; console.log(self.nouvelleCase)
+		// 		self.ancienneCase = self.nouvelleCase + 10; console.log(self.ancienneCase)
+		// 		if (casesTotale[self.nouvelleCase].id == 'obstacle') {
+		// 			$(self.block).hide();
+		// 			$(autreJoueur.block).show();
+		// 			$(autreJoueur.gauche).show();
+		// 			$(autreJoueur.haut).show();
+		// 			$(autreJoueur.droite).show();
+		// 			$(autreJoueur.bas).show();
+		// 			autreJoueur.nbMove = 0;
+		// 		} else {
+
+		// 			let image = new Image();
+		// 			image.src = self.img;
+
+		// 			image.addEventListener('load', function () {
+		// 				context.drawImage(image, casesTotale[self.nouvelleCase].positionX, casesTotale[self.nouvelleCase].positionY, tailleCase, tailleCase);
+		// 			}, false);
+		// 			resetCase(self.ancienneCase); console.log(casesTotale)
+
+		// 		}
+
+		// 	});
+		}
 }
 
-const personnage1 = new Personnage("Madara", "Madara.jpg");
-const personnage2 = new Personnage("Hashirama", "hashirama.jpg");
-personnage1.set(personnage2);
-personnage2.set(personnage1);
+	const personnage1 = new Personnage("Madara", "Madara.jpg", '#gauche1', '#droite1', '#haut1', '#bas1', "#block1");
+	const personnage2 = new Personnage("Hashirama", "hashirama.jpg", '#gauche2', '#droite2', '#haut2', '#bas2', "#block2");
+	personnage1.set(personnage2);
+	personnage2.set(personnage1);
+	personnage1.deplacement(personnage2);
+	
 
 
-const nombreObstacles = 10; // On veut 10 obstacles sur le plateau
+	const nombreObstacles = 10; // On veut 10 obstacles sur le plateau
 
-// création des cases obstacles
-for (let i = 0; i < nombreObstacles; i++) {
+	// création des cases obstacles
+	for(let i = 0; i <nombreObstacles; i++) {
 	let numeroCaseAleatoire = randomNumber();
 	if (casesTotale[numeroCaseAleatoire].id != "casevide") {
 		--i;
@@ -101,7 +266,10 @@ class Weapons {
 
 		}
 
+
 	}
+
+
 }
 
 
