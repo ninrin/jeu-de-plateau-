@@ -167,26 +167,7 @@ $(document).ready(function () {
 			return image;
 		}
 	}
-	// Reset l'ancienne case, portant le joueur
-	function resetCase(laCase) {
-		if (casesTotale[laCase]) {
-			context.fillStyle = "white";
-			context.fillRect(casesTotale[laCase].positionX, casesTotale[laCase].positionY, tailleCase, tailleCase);
-			context.strokeStyle = 'purple';
-			context.strokeRect(casesTotale[laCase].positionX, casesTotale[laCase].positionY, tailleCase, tailleCase); // Crée un case d'1/100 du plateau
-			casesTotale[laCase].id = "casevide";
-		}
-	};
-
-	// Lancement du système de combat, lorsque nos 2 protagonistes se croisent
-	// function croissement(caseJoueurMadara, caseJoueurHashirama) {
-	// 	if ((caseJoueurMadara == caseJoueurHashirama - 10) || (caseJoueurMadara == caseJoueurHashirama + 10) || (caseJoueurMadara == caseJoueurHashirama - 1) || (caseJoueurMadara == caseJoueurHashirama + 1)) {
-	// 		$("#block2").hide();
-	// 		$("#block1").hide();
-	// 		$("#fight1").show();
-	// 		$("#defendre1").show();
-	// 	}
-	// };
+	
 
 
 
@@ -360,10 +341,10 @@ $(document).ready(function () {
 	// deplacement((-10), (-10), '#bas1', '#haut1', '#gauche1', '#droite1');
 
 	// mise en oeuvre des bouttons de déplacements de hashirama
-	deplacement2(10, 10, '#haut2', '#bas2', '#gauche2', '#droite2');
-	deplacement2(1, 1, '#gauche2', '#bas2', '#haut2', '#droite2');
-	deplacement2((-1), (-1), '#droite2', '#bas2', '#gauche2', '#haut2');
-	deplacement2((-10), (-10), '#bas2', '#haut2', '#gauche2', '#droite2');
+	// deplacement2(10, 10, '#haut2', '#bas2', '#gauche2', '#droite2');
+	// deplacement2(1, 1, '#gauche2', '#bas2', '#haut2', '#droite2');
+	// deplacement2((-1), (-1), '#droite2', '#bas2', '#gauche2', '#haut2');
+	// deplacement2((-10), (-10), '#bas2', '#haut2', '#gauche2', '#droite2');
 
 
 
