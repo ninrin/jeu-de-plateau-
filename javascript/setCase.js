@@ -291,7 +291,7 @@ class Personnage {
 
 
 // instantation pour les 2 personnages
-const personnage1 = new Personnage("Madara", "Madara.jpg", '#gauche1', '#droite1', '#haut1', '#bas1', "#block1", "#attaque1");
+const personnage1 = new Personnage("Madara", "madara.jpg", '#gauche1', '#droite1', '#haut1', '#bas1', "#block1", "#attaque1");
 const personnage2 = new Personnage("Hashirama", "hashirama.jpg", '#gauche2', '#droite2', '#haut2', '#bas2', "#block2","#attaque2");
 
 
@@ -351,7 +351,7 @@ class Weapons {
 // création des 4 armes
 let weapon1 = new Weapons(0, "kunai", 20, "kunai.jpg");
 let weapon2 = new Weapons(1, "guan dao", 30, "guan_dao.jpg");
-let weapon3 = new Weapons(2, "parchemin explosif", 40, "Parchemin_explosif.png");
+let weapon3 = new Weapons(2, "parchemin explosif", 40, "Parchemin_Explosif.png");
 let weapon4 = new Weapons(3, "épée de kusanagi", 50, "kusanagi.jpg");
 
 // appelle de la méthode setUp pour placer aléatoirement les armes
