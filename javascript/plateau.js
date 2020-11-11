@@ -41,6 +41,21 @@ function creerPlateau() {
       ligne++;
     }
   }
+  const nombreObstacles = 10; // On veut 10 obstacles sur le plateau
+
+// création des cases obstacles
+for (let i = 0; i < nombreObstacles; i++) {
+	let numeroCaseAleatoire = randomNumber();
+	if (casesTotale[numeroCaseAleatoire].id != "casevide") {
+		--i;
+	} else {
+		casesTotale[numeroCaseAleatoire].id = "obstacle"; // si ça tombe sur une case vide, alors id = obstacle.
+		context.fillStyle = "grey";
+		context.fillRect(casesTotale[numeroCaseAleatoire].positionX, casesTotale[numeroCaseAleatoire].positionY, tailleCase, tailleCase);
+		context.strokeStyle = 'purple';
+		context.strokeRect(casesTotale[numeroCaseAleatoire].positionX, casesTotale[numeroCaseAleatoire].positionY, tailleCase, tailleCase); 
+	}
+}
 }
 
 creerPlateau();
